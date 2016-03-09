@@ -28,34 +28,52 @@ public class VendingMachineTest {
 		item1 = null;
 		item2 = null;
 	}
+	
+	@Test
+	public void testAddItemA() {
+		vend1.addItem(item1, "B");
+
+	}
+
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemOccupied() {
+		vend1.addItem(item1, "A");
+		vend1.addItem(item2, "A");
+	}
 
 	@Test
-	public void testAddItem() {
-		vend1.addItem(item1, "A");
-
-		try {
-			vend1.addItem(item2, "A");
-			fail("Expected exception");
-		} catch (VendingMachineException e) {
-
-		}
+	public void testAddItemB() {
+		vend1.addItem(item1, "B");
 
 	}
 
 	@Test
+	public void testAddItemC() {
+		vend1.addItem(item1, "C");
+
+	}
+
+	@Test
+	public void testAddItemD() {
+		vend1.addItem(item1, "D");
+
+	}
+	
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemException() {
+		vend1.addItem(item1, "E");
+
+	}
+
+	@Test 
 	public void testRemoveItem() {
 		vend1.addItem(item1, "A");
 		assertEquals(item1, vend1.removeItem("A"));
 	}
 
-	@Test
+	@Test(expected=VendingMachineException.class)
 	public void testRemoveItemException() {
-		try {
-			vend1.removeItem("B");
-			fail("Expected Exception");
-		} catch (VendingMachineException e) {
-
-		}
+		vend1.removeItem("B");
 	}
 
 	@Test
@@ -63,14 +81,9 @@ public class VendingMachineTest {
 		vend1.insertMoney(20);
 	}
 
-	@Test
+	@Test(expected=VendingMachineException.class)
 	public void testInsertMoneyException() {
-		try {
-			vend1.insertMoney(-20);
-			fail("Expected Exception");
-		} catch (VendingMachineException e) {
-
-		}
+		vend1.insertMoney(-20);
 	}
 
 	@Test
